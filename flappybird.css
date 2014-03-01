@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.clearfix::before,
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+div#Background {
+    margin: 0 auto;
+    width: 800px;
+    height: 600px;
+    background: url('Images/Background.png');
+    position: relative;
+    overflow: hidden;
+}
+
+div#Bird {
+    width: 40px;
+    height: 40px;
+    background: url('Images/Birds.png');
+    position: absolute;
+    left: 100px;
+    top: 100px;
+}
+
+div#Background > ul > li {
+    float: left;
+    display: block;
+}
+
+ul#Pipes {
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    bottom: 112px;
+}
+
+    ul#Pipes > li {
+        position: relative;
+        width: 52px;
+        height: 1000px;
+    }
+
+        ul#Pipes > li:not(:first-child) {
+            margin-left: 70px;
+        }
+
+        ul#Pipes > li::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            background: url('Images/Pipe_Top.png');
+            width: 52px;
+            height: 420px;
+        }
+
+        ul#Pipes > li::after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 0;
+            background: url('Images/Pipe_Bottom.png');
+            width: 52px;
+            height: 420px;
+        }
+
+ul#Grounds {
+    position: absolute;
+    bottom: 0;
+    width: 1500px;
+}
+
+    ul#Grounds > li {
+        background: url('Images/Ground.png');
+        width: 336px;
+        height: 112px;
+    }
+
+/* <Temp> */
+ul#Pipes > li:first-child {
+    margin-left: 370px;
+}
+
+ul#Pipes > li:nth-child(2n) {
+    margin-top: -200px;
+}
+
+ul#Pipes > li:nth-child(2n+1) {
+    margin-top: -300px;
+}
+
+@keyframes MoveGround {
+    from { margin-left: 0; }
+    to { margin-left: -24px; }
+}
+
+@-moz-keyframes MoveGround {
+    from { margin-left: 0; }
+    to { margin-left: -24px; }
+}
+
+@-webkit-keyframes MoveGround {
+    from { margin-left: 0; }
+    to { margin-left: -24px; }
+}
+
+ul#Grounds {
+    -moz-animation: MoveGround 0.3s linear infinite;
+    -o-animation: MoveGround 0.3s linear infinite;
+    -webkit-animation: MoveGround 0.3s linear infinite;
+    animation: MoveGround 0.3s linear infinite;
+}
+/* </Temp> */
