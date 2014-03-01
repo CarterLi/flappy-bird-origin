@@ -9,19 +9,65 @@
     <div id="Background">
         <div id="Bird"></div>
         <ul id="Pipes" class="clearfix">
-            <li />
-            <li />
-            <li />
-            <li />
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
         </ul>
         <ul id="Grounds" class="clearfix">
-            <li />
-            <li />
-            <li />
+            <li></li>
+            <li></li>
+            <li></li>
         </ul>
     </div>
     <div hidden="hidden">
-        <img id="Ground" src="Images/Ground.png" />
+        <audio id="Hit" src="Sounds/Hit.wav"></audio>
+        <audio id="Wing" src="Sounds/Wing.wav"></audio>
     </div>
+    <script type="text/javascript">
+        //<![CDATA[
+        var time = null, speedY = 0, posY = 200, a = -6;
+        var bird = document.querySelector("#Bird"), birdStyle = bird.style;
+        var Hit = document.getElementById("Hit"), Wing = document.getElementById("Wing");
+
+        function game_over() {
+            var style = document.getElementById("Grounds").style;
+            style.webkitAnimationPlayState = style.mozAnimationPlayState = style.animationPlayState = "paused";
+            birdStyle.webkitAnimationPlayState = birdStyle.mozAnimationPlayState = birdStyle.animationPlayState = "paused";
+            document.removeEventListener("keypress", jump);
+        }
+
+        function jump() {
+            speedY = 30;
+            // TODO: IE
+            Wing.currentTime = 0;
+            Wing.play();
+        }
+
+        function go(timestamp) {
+            if (time === null)
+                time = timestamp;
+            var t = (timestamp - time) / 100;
+            posY -= speedY * t + a * t * t / 2;
+            if (posY < -8) {
+                posY = -8;
+                speedY = 0
+            } else if (posY > 455) {
+                bird.style.top = "456px";
+                Hit.play();
+                game_over();
+                return;
+            }
+            speedY += a * t;
+            birdStyle.webkitTransform = birdStyle.transform = "rotate(" + (-speedY) + "deg)";
+            birdStyle.top = posY + "px";
+            time = timestamp;
+            window.requestAnimationFrame(go);
+        }
+
+        window.requestAnimationFrame(go);
+        document.addEventListener("keypress", jump);
+        //]]>
+    </script>
 </body>
 </html>

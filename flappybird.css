@@ -23,6 +23,48 @@ div#Background {
     overflow: hidden;
 }
 
+@keyframes BirdFly {
+    from { background-position-x: 0; }
+    25% { background-position-x: 0; }
+
+    25.0001% { background-position-x: -40px; }
+    50% { background-position-x: -40px; }
+
+    50.0001% { background-position-x: -80px; }
+    75% { background-position-x: -80px; }
+
+    75.0001% { background-position-x: -40px; }
+    to { background-position-x: -40px; }
+}
+
+@-moz-keyframes BirdFly {
+    from { background-position-x: 0; }
+    25% { background-position-x: 0; }
+
+    25.0001% { background-position-x: -40px; }
+    50% { background-position-x: -40px; }
+
+    50.0001% { background-position-x: -80px; }
+    75% { background-position-x: -80px; }
+
+    75.0001% { background-position-x: -40px; }
+    to { background-position-x: -40px; }
+}
+
+@-webkit-keyframes BirdFly {
+    from { background-position-x: 0; }
+    25% { background-position-x: 0; }
+
+    25.0001% { background-position-x: -40px; }
+    50% { background-position-x: -40px; }
+
+    50.0001% { background-position-x: -80px; }
+    75% { background-position-x: -80px; }
+
+    75.0001% { background-position-x: -40px; }
+    to { background-position-x: -40px; }
+}
+
 div#Bird {
     width: 40px;
     height: 40px;
@@ -30,6 +72,11 @@ div#Bird {
     position: absolute;
     left: 100px;
     top: 100px;
+
+    -moz-animation: BirdFly 1s linear infinite;
+    -o-animation: BirdFly 1s linear infinite;
+    -webkit-animation: BirdFly .5s linear infinite;
+    animation: BirdFly 1s linear infinite;
 }
 
 div#Background > ul > li {
@@ -74,10 +121,31 @@ ul#Pipes {
             height: 420px;
         }
 
+
+@keyframes MoveGround {
+    from { margin-left: 0; }
+    to { margin-left: -120px; }
+}
+
+@-moz-keyframes MoveGround {
+    from { margin-left: 0; }
+    to { margin-left: -120px; }
+}
+
+@-webkit-keyframes MoveGround {
+    from { margin-left: 0; }
+    to { margin-left: -120px; }
+}
+
 ul#Grounds {
     position: absolute;
     bottom: 0;
     width: 1500px;
+
+    -moz-animation: MoveGround 1.5s linear infinite;
+    -o-animation: MoveGround 1.5s linear infinite;
+    -webkit-animation: MoveGround 1.5s linear infinite;
+    animation: MoveGround 1.5s linear infinite;
 }
 
     ul#Grounds > li {
@@ -97,27 +165,5 @@ ul#Pipes > li:nth-child(2n) {
 
 ul#Pipes > li:nth-child(2n+1) {
     margin-top: -300px;
-}
-
-@keyframes MoveGround {
-    from { margin-left: 0; }
-    to { margin-left: -24px; }
-}
-
-@-moz-keyframes MoveGround {
-    from { margin-left: 0; }
-    to { margin-left: -24px; }
-}
-
-@-webkit-keyframes MoveGround {
-    from { margin-left: 0; }
-    to { margin-left: -24px; }
-}
-
-ul#Grounds {
-    -moz-animation: MoveGround 0.3s linear infinite;
-    -o-animation: MoveGround 0.3s linear infinite;
-    -webkit-animation: MoveGround 0.3s linear infinite;
-    animation: MoveGround 0.3s linear infinite;
 }
 /* </Temp> */
