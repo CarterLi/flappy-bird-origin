@@ -73,10 +73,10 @@ div#Bird {
     left: 100px;
     top: 100px;
 
-    -moz-animation: BirdFly 1s linear infinite;
-    -o-animation: BirdFly 1s linear infinite;
+    -moz-animation: BirdFly .5s linear infinite;
+    -o-animation: BirdFly .5s linear infinite;
     -webkit-animation: BirdFly .5s linear infinite;
-    animation: BirdFly 1s linear infinite;
+    animation: BirdFly .5s linear infinite;
 }
 
 div#Background > ul > li {
@@ -88,6 +88,7 @@ ul#Pipes {
     position: absolute;
     overflow: hidden;
     top: 0;
+    width: 1200px;
     bottom: 112px;
 }
 
@@ -95,10 +96,29 @@ ul#Pipes {
         position: relative;
         width: 52px;
         height: 1000px;
+        margin-left: 100px;
     }
 
-        ul#Pipes > li:not(:first-child) {
-            margin-left: 70px;
+        ul#Pipes > li.moving {
+            margin-left: -52px;
+
+            -moz-transition: margin-left linear 0.83516483516484s;
+            -o-transition: margin-left linear 0.83516483516484s;
+            -webkit-transition: margin-left linear 0.83516483516484s;
+            transition: margin-left linear 0.83516483516484s;
+        }
+
+        ul#Pipes > li.begin {
+            margin-left: 858px;
+        }
+
+        ul#Pipes > li.begin.moving {
+            margin-left: -52px;
+
+            -moz-transition: margin-left linear 5s;
+            -o-transition: margin-left linear 5s;
+            -webkit-transition: margin-left linear 5s;
+            transition: margin-left linear 5s;
         }
 
         ul#Pipes > li::before {
@@ -124,17 +144,17 @@ ul#Pipes {
 
 @keyframes MoveGround {
     from { margin-left: 0; }
-    to { margin-left: -120px; }
+    to { margin-left: -168px; }
 }
 
 @-moz-keyframes MoveGround {
     from { margin-left: 0; }
-    to { margin-left: -120px; }
+    to { margin-left: -168px; }
 }
 
 @-webkit-keyframes MoveGround {
     from { margin-left: 0; }
-    to { margin-left: -120px; }
+    to { margin-left: -168px; }
 }
 
 ul#Grounds {
@@ -142,10 +162,10 @@ ul#Grounds {
     bottom: 0;
     width: 1500px;
 
-    -moz-animation: MoveGround 1.5s linear infinite;
-    -o-animation: MoveGround 1.5s linear infinite;
-    -webkit-animation: MoveGround 1.5s linear infinite;
-    animation: MoveGround 1.5s linear infinite;
+    -moz-animation: MoveGround 0.92307692307s linear infinite;
+    -o-animation: MoveGround 0.92307692307s linear infinite;
+    -webkit-animation: MoveGround 0.92307692307s linear infinite;
+    animation: MoveGround 0.92307692307s linear infinite;
 }
 
     ul#Grounds > li {
@@ -155,15 +175,11 @@ ul#Grounds {
     }
 
 /* <Temp> */
-ul#Pipes > li:first-child {
-    margin-left: 370px;
-}
-
 ul#Pipes > li:nth-child(2n) {
     margin-top: -200px;
 }
 
 ul#Pipes > li:nth-child(2n+1) {
-    margin-top: -300px;
+    margin-top: -200px;
 }
 /* </Temp> */

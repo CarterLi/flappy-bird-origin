@@ -9,6 +9,9 @@
     <div id="Background">
         <div id="Bird"></div>
         <ul id="Pipes" class="clearfix">
+            <li class="begin"></li>
+            <li></li>
+            <li></li>
             <li></li>
             <li></li>
             <li></li>
@@ -27,7 +30,7 @@
     <script type="text/javascript">
         //<![CDATA[
         var time = null, speedY = 0, posY = 200, a = -6;
-        var bird = document.querySelector("#Bird"), birdStyle = bird.style;
+        var bird = document.getElementById("Bird"), birdStyle = bird.style;
         var Hit = document.getElementById("Hit"), Wing = document.getElementById("Wing");
 
         function game_over() {
@@ -44,9 +47,22 @@
             Wing.play();
         }
 
+        function removePipe() {
+            var nextPipe = this.nextElementSibling;
+            var Pipes = this.parentNode;
+            Pipes.removeChild(this);
+            Pipes.appendChild(document.createElement("li"));
+            nextPipe.classList.add("moving");
+            nextPipe.addEventListener("transitionend", removePipe);
+        }
+
         function go(timestamp) {
-            if (time === null)
+            if (time === null) {
                 time = timestamp;
+                var pipe = document.querySelector("#Pipes > li:first-child");
+                pipe.classList.add("moving");
+                pipe.addEventListener("transitionend", removePipe);
+            }
             var t = (timestamp - time) / 100;
             posY -= speedY * t + a * t * t / 2;
             if (posY < -8) {
@@ -65,8 +81,10 @@
             window.requestAnimationFrame(go);
         }
 
-        window.requestAnimationFrame(go);
-        document.addEventListener("keypress", jump);
+        (function() {
+            window.requestAnimationFrame(go);
+            document.addEventListener("keypress", jump);
+        })();
         //]]>
     </script>
 </body>
