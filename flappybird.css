@@ -7,6 +7,15 @@
     user-select: none;
 }
 
+    *.paused, *.paused *,
+    body.ready ul#Pipes > li,
+    body.end ul#Pipes > li, body.end ul#Grounds, body.end div#Bird {
+        -moz-animation-play-state: paused !important;
+        -o-animation-play-state: paused !important;
+        -webkit-animation-play-state: paused !important;
+        animation-play-state: paused !important;
+    }
+
 .clearfix::before,
 .clearfix::after {
     content: "";
@@ -67,16 +76,18 @@ div#Background {
 
 div#Bird {
     width: 40px;
-    height: 40px;
-    background: url('Images/Birds.png');
+    height: 25px;
+    background: url('Images/Birds.png') 0 -8px;
+    overflow: hidden;
     position: absolute;
-    left: 100px;
-    top: 100px;
+    left: 150px;
+    top: 200px;
+    z-index: 1000;
 
-    -moz-animation: BirdFly .5s linear infinite;
-    -o-animation: BirdFly .5s linear infinite;
-    -webkit-animation: BirdFly .5s linear infinite;
-    animation: BirdFly .5s linear infinite;
+    -moz-animation: BirdFly .3s linear infinite;
+    -o-animation: BirdFly .3s linear infinite;
+    -webkit-animation: BirdFly .3s linear infinite;
+    animation: BirdFly .3s linear infinite;
 }
 
 div#Background > ul > li {
@@ -99,14 +110,6 @@ div#Background > ul > li {
     to { left: -52px; }
 }
 
-div.Pipes {
-    position: absolute;
-    overflow: hidden;
-    top: 0;
-    width: 800px;
-    bottom: 112px;
-}
-
 ul#Pipes {
     position: relative;
     width: 100%;
@@ -126,32 +129,39 @@ ul#Pipes {
         animation: MovePipes 5s infinite linear;
     }
 
-        ul#Pipes > li:nth-child(2) {
+        ul#Pipes > li:nth-child(1) {
             -moz-animation-delay: 1s;
             -o-animation-delay: 1s;
             -webkit-animation-delay: 1s;
             animation-delay: 1s;
         }
 
-        ul#Pipes > li:nth-child(3) {
+        ul#Pipes > li:nth-child(2) {
             -moz-animation-delay: 2s;
             -o-animation-delay: 2s;
             -webkit-animation-delay: 2s;
             animation-delay: 2s;
         }
 
-        ul#Pipes > li:nth-child(4) {
+        ul#Pipes > li:nth-child(3) {
             -moz-animation-delay: 3s;
             -o-animation-delay: 3s;
             -webkit-animation-delay: 3s;
             animation-delay: 3s;
         }
 
-        ul#Pipes > li:nth-child(5) {
+        ul#Pipes > li:nth-child(4) {
             -moz-animation-delay: 4s;
             -o-animation-delay: 4s;
             -webkit-animation-delay: 4s;
             animation-delay: 4s;
+        }
+
+        ul#Pipes > li:nth-child(5) {
+            -moz-animation-delay: 5s;
+            -o-animation-delay: 5s;
+            -webkit-animation-delay: 5s;
+            animation-delay: 5s;
         }
 
         ul#Pipes > li::before {
@@ -160,7 +170,7 @@ ul#Pipes {
             background: url('Images/Pipe_Top.png');
             height: 420px;
         }
-        
+
         ul#Pipes > li > div {
             content: "";
             display: block;
@@ -206,3 +216,117 @@ ul#Grounds {
         width: 336px;
         height: 112px;
     }
+
+body:not(.ready) div#GetReady {
+    opacity: 0;
+    -moz-transition: opacity ease-in-out .5s;
+    -o-transition: opacity ease-in-out .5s;
+    -webkit-transition: opacity ease-in-out .5s;
+    transition: opacity ease-in-out .5s;
+}
+
+div#GetReady, div#GameOver {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+    div#GetReady > div.title {
+        width: 300px;
+        height: 90px;
+        margin: 60px auto;
+        background: url('Images/Hint.png');
+    }
+
+    div#GetReady > div.hint {
+        width: 230px;
+        height: 150px;
+        margin: 60px auto;
+        background: url('Images/Hint.png') 0 -170px;
+    }
+
+body:not(.end) div#GameOver {
+    z-index: -1000;
+}
+
+div#GameOver > div.title {
+    width: 300px;
+    height: 82px;
+    margin: 60px auto 0;
+    background: url('Images/Hint.png') 0 -90px;
+    
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+
+    -moz-transition: -moz-transform ease-in-out 0.5s;
+    -o-transition: -o-transform ease-in-out 0.5s;
+    -webkit-transition: -webkit-transform ease-in-out 0.5s;
+    transition: transform ease-in-out 0.5s;
+}
+
+body:not(.end) div#GameOver > div.title {
+    -moz-transform: translateY(-142px);
+    -ms-transform: translateY(-142px);
+    -o-transform: translateY(-142px);
+    -webkit-transform: translateY(-142px);
+    transform: translateY(-142px);
+}
+
+div#GameOver > div.score_board {
+    width: 348px;
+    height: 182px;
+    margin: 30px auto 0;
+    background: url('Images/ScoreBoard.png');
+}
+
+div#GameOver > div.buttons {
+    width: 348px;
+    height: 100px;
+    margin: 45px auto 0;
+}
+
+    div#GameOver > div.buttons > a {
+        float: left;
+        display: block;
+        width: 174px;
+        height: 105px;
+        background: url('Images/Buttons.png');
+    }
+
+        div#GameOver > div.buttons > a:hover {
+            background-position-y: -105px;
+        }
+
+        div#GameOver > div.buttons > a:active {
+            background-position-y: -210px;
+        }
+
+        div#GameOver > div.buttons > a.score {
+            background-position-x: -180px;
+        }
+
+div#GameOver > div.score_board,
+div#GameOver > div.buttons {
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+
+    -moz-transition: -moz-transform ease-in-out 0.5s 0.5s;
+    -o-transition: -o-transform ease-in-out 0.5s 0.5s;
+    -webkit-transition: -webkit-transform ease-in-out 0.5s 0.5s;
+    transition: transform ease-in-out 0.5s 0.5s;
+}
+
+body:not(.end) div#GameOver > div.score_board,
+body:not(.end) div#GameOver > div.buttons {
+    -moz-transform: translateY(425px);
+    -ms-transform: translateY(425px);
+    -o-transform: translateY(425px);
+    -webkit-transform: translateY(425px);
+    transform: translateY(425px);
+}
