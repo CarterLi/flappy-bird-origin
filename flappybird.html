@@ -8,15 +8,15 @@
 <body>
     <div id="Background">
         <div id="Bird"></div>
-        <ul id="Pipes" class="clearfix">
-            <li class="begin"></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
+        <div class="Pipes">
+            <ul id="Pipes" class="clearfix">
+                <li><div></div></li>
+                <li><div></div></li>
+                <li><div></div></li>
+                <li><div></div></li>
+                <li><div></div></li>
+            </ul>
+        </div>
         <ul id="Grounds" class="clearfix">
             <li></li>
             <li></li>
@@ -34,9 +34,14 @@
         var Hit = document.getElementById("Hit"), Wing = document.getElementById("Wing");
 
         function game_over() {
-            var style = document.getElementById("Grounds").style;
-            style.webkitAnimationPlayState = style.mozAnimationPlayState = style.animationPlayState = "paused";
+            var groundsStyle = document.getElementById("Grounds").style;
+            groundsStyle.webkitAnimationPlayState = groundsStyle.mozAnimationPlayState = groundsStyle.animationPlayState = "paused";
             birdStyle.webkitAnimationPlayState = birdStyle.mozAnimationPlayState = birdStyle.animationPlayState = "paused";
+            var pipes = document.querySelectorAll("#Pipes > li");
+            for (var i = 0; i < pipes.length; ++i) {
+                var pipeStle = pipes.item(i).style;
+                pipeStle.webkitAnimationPlayState = pipeStle.mozAnimationPlayState = pipeStle.animationPlayState = "paused";
+            }
             document.removeEventListener("keypress", jump);
         }
 
@@ -59,9 +64,14 @@
         function go(timestamp) {
             if (time === null) {
                 time = timestamp;
-                var pipe = document.querySelector("#Pipes > li:first-child");
-                pipe.classList.add("moving");
-                pipe.addEventListener("transitionend", removePipe);
+                var pipes = document.querySelectorAll("#Pipes > li");
+                for (var i = 0; i < pipes.length; ++i) {
+                    var pipe = pipes.item(i);
+                    pipe.style.top = (-Math.random() * 350 - 100) + "px";
+                    pipe.addEventListener("webkitAnimationIteration", function () {
+                        this.style.top = (-Math.random() * 350 - 50) + "px";
+                    });
+                }
             }
             var t = (timestamp - time) / 100;
             posY -= speedY * t + a * t * t / 2;

@@ -84,60 +84,93 @@ div#Background > ul > li {
     display: block;
 }
 
-ul#Pipes {
+@keyframes MovePipes {
+    from { left: 852px; }
+    to { left: -52px; }
+}
+
+@-moz-keyframes MovePipes {
+    from { left: 852px; }
+    to { left: -52px; }
+}
+
+@-webkit-keyframes MovePipes {
+    from { left: 852px; }
+    to { left: -52px; }
+}
+
+div.Pipes {
     position: absolute;
     overflow: hidden;
     top: 0;
-    width: 1200px;
+    width: 800px;
     bottom: 112px;
 }
 
+ul#Pipes {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
     ul#Pipes > li {
-        position: relative;
+        position: absolute;
         width: 52px;
         height: 1000px;
-        margin-left: 100px;
+        left: 852px;
+        display: block;
+
+        -moz-animation: MovePipes 5s infinite linear;
+        -o-animation: MovePipes 5s infinite linear;
+        -webkit-animation: MovePipes 5s infinite linear;
+        animation: MovePipes 5s infinite linear;
     }
 
-        ul#Pipes > li.moving {
-            margin-left: -52px;
-
-            -moz-transition: margin-left linear 0.83516483516484s;
-            -o-transition: margin-left linear 0.83516483516484s;
-            -webkit-transition: margin-left linear 0.83516483516484s;
-            transition: margin-left linear 0.83516483516484s;
+        ul#Pipes > li:nth-child(2) {
+            -moz-animation-delay: 1s;
+            -o-animation-delay: 1s;
+            -webkit-animation-delay: 1s;
+            animation-delay: 1s;
         }
 
-        ul#Pipes > li.begin {
-            margin-left: 858px;
+        ul#Pipes > li:nth-child(3) {
+            -moz-animation-delay: 2s;
+            -o-animation-delay: 2s;
+            -webkit-animation-delay: 2s;
+            animation-delay: 2s;
         }
 
-        ul#Pipes > li.begin.moving {
-            margin-left: -52px;
+        ul#Pipes > li:nth-child(4) {
+            -moz-animation-delay: 3s;
+            -o-animation-delay: 3s;
+            -webkit-animation-delay: 3s;
+            animation-delay: 3s;
+        }
 
-            -moz-transition: margin-left linear 5s;
-            -o-transition: margin-left linear 5s;
-            -webkit-transition: margin-left linear 5s;
-            transition: margin-left linear 5s;
+        ul#Pipes > li:nth-child(5) {
+            -moz-animation-delay: 4s;
+            -o-animation-delay: 4s;
+            -webkit-animation-delay: 4s;
+            animation-delay: 4s;
         }
 
         ul#Pipes > li::before {
             content: "";
             display: block;
-            position: absolute;
-            top: 0;
             background: url('Images/Pipe_Top.png');
-            width: 52px;
             height: 420px;
+        }
+        
+        ul#Pipes > li > div {
+            content: "";
+            display: block;
+            height: 120px;
         }
 
         ul#Pipes > li::after {
             content: "";
             display: block;
-            position: absolute;
-            bottom: 0;
             background: url('Images/Pipe_Bottom.png');
-            width: 52px;
             height: 420px;
         }
 
@@ -173,13 +206,3 @@ ul#Grounds {
         width: 336px;
         height: 112px;
     }
-
-/* <Temp> */
-ul#Pipes > li:nth-child(2n) {
-    margin-top: -200px;
-}
-
-ul#Pipes > li:nth-child(2n+1) {
-    margin-top: -200px;
-}
-/* </Temp> */
