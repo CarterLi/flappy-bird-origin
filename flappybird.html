@@ -30,24 +30,28 @@
                 <li></li>
             </ul>
         </div>
+        <div id="Score" class="score big-score"><span></span><span></span><span></span><span number="0"></span></div>
         <div id="GetReady">
             <div class="title"></div>
             <div class="hint"></div>
         </div>
         <div id="GameOver">
             <div class="title"></div>
-            <div class="score_board"></div>
+            <div class="score_board">
+                <div class="score small-score"><span></span><span></span><span></span><span></span></div>
+            </div>
             <div class="buttons clearfix">
                 <a href="javascript:;" class="play"></a>
                 <a href="javascript:;" class="score"></a>
             </div>
         </div>
     </div>
-    <div hidden="hidden">
-        <audio id="Hit" src="Sounds/Hit.wav"></audio>
-        <audio id="Wing" src="Sounds/Wing.wav"></audio>
-        <audio id="Die" src="Sounds/Die.wav"></audio>
-        <audio id="Swooshing" src="Sounds/Swooshing.wav"></audio>
+    <div id="Audio" hidden="hidden">
+        <audio class="hit" src="Sounds/Hit.wav"></audio>
+        <audio class="wing" src="Sounds/Wing.wav"></audio>
+        <audio class="die" src="Sounds/Die.wav"></audio>
+        <audio class="swooshing" src="Sounds/Swooshing.wav"></audio>
+        <audio class="point" src="Sounds/Point.wav"></audio>
     </div>
     <script type="text/javascript" src="flappybird.js"></script>
 </body>

@@ -1,7 +1,9 @@
-var time = null, speedY = 0, posY = 200, a = -9;
-var bird = document.getElementById("Bird"), birdStyle = bird.style;
-var Hit = document.getElementById("Hit"), Wing = document.getElementById("Wing"),
-    Swooshing = document.getElementById("Swooshing");
+var startTime = null, time = null, speedY = 0, posY = 200, a = -9, oldScore = 0;
+var bird = document.querySelector("#Bird"), birdStyle = bird.style;
+var Hit = document.querySelector("#Audio > audio.hit"),
+    Wing = document.querySelector("#Audio > audio.wing"),
+    Swooshing = document.querySelector("#Audio > audio.swooshing"),
+    Point = document.querySelector("#Audio > audio.point");
 
 function game_start() {
     document.removeEventListener("keypress", game_start);
@@ -17,6 +19,8 @@ function game_start() {
 }
 
 function game_over() {
+    setScore(document.querySelector("#GameOver > div.score_board > div.score"), oldScore, true);
+
     document.querySelector("body").classList.add("end");
 
     document.removeEventListener("keypress", jump);
@@ -45,9 +49,41 @@ function removePipe() {
     nextPipe.addEventListener("transitionend", removePipe);
 }
 
+function setScore(element, score, force) {
+    if (score < 0) {
+        score = 0;
+    } else if (score > 9999) {
+        score = 9999;
+    }
+    if (score === oldScore && !force) {
+        return;
+    } else {
+        oldScore = score;
+    }
+
+    if (!force) {
+        Point.currentTime = 0;
+        Point.play();
+    }
+
+    var i = 1;
+    for (; i <= 4; ++i) {
+        var num = score % 10;
+        element.querySelector("span:nth-last-child(" + i + ")").setAttribute("number", num);
+        score = Math.floor(score / 10);
+        if (score === 0) {
+            ++i;
+            break;
+        }
+    }
+    for (; i <= 4; ++i) {
+        element.querySelector("span:nth-last-child(" + i + ")").removeAttribute("number");
+    }
+}
+
 function go(timestamp) {
     if (time === null) {
-        time = timestamp;
+        startTime = time = timestamp;
         var pipes = document.querySelectorAll("#Pipes > li");
         for (var i = 0; i < pipes.length; ++i) {
             var pipe = pipes.item(i);
@@ -87,6 +123,9 @@ function go(timestamp) {
     birdStyle.webkitTransform = birdStyle.transform = "rotate(" + (-speedY) + "deg)";
     birdStyle.top = posY + "px";
     time = timestamp;
+
+    setScore(document.getElementById("Score"), Math.floor(((timestamp - startTime) / 1000 - 4)));
+
     window.requestAnimationFrame(go);
 }
 

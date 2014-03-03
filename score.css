@@ -1,0 +1,97 @@
+div.score {
+    text-align: center;
+}
+
+div.big-score > span[number] {
+    display: inline-block;
+    width: 40px;
+    height: 60px;
+    background: url('Images/ScoreFont.png');
+}
+
+div.big-score > span[number='0'] {
+    background-position: 0 0;
+}
+
+div.big-score > span[number='1'] {
+    background-position: -40px 0;
+}
+
+div.big-score > span[number='2'] {
+    background-position: -80px 0;
+}
+
+div.big-score > span[number='3'] {
+    background-position: -120px 0;
+}
+
+div.big-score > span[number='4'] {
+    background-position: -160px 0;
+}
+
+div.big-score > span[number='5'] {
+    background-position: 0 -60px;
+}
+
+div.big-score > span[number='6'] {
+    background-position: -40px -60px;
+}
+
+div.big-score > span[number='7'] {
+    background-position: -80px -60px;
+}
+
+div.big-score > span[number='8'] {
+    background-position: -120px -60px;
+}
+
+div.big-score > span[number='9'] {
+    background-position: -160px -60px;
+}
+
+div.small-score > span[number] {
+    display: inline-block;
+    width: 25px;
+    height: 32px;
+    background: url('Images/ScoreFontMini.png');
+}
+
+div.small-score > span[number='0'] {
+    background-position: 0 0;
+}
+
+div.small-score > span[number='1'] {
+    background-position: -25px 0;
+}
+
+div.small-score > span[number='2'] {
+    background-position: -50px 0;
+}
+
+div.small-score > span[number='3'] {
+    background-position: -75px 0;
+}
+
+div.small-score > span[number='4'] {
+    background-position: -100px 0;
+}
+
+div.small-score > span[number='5'] {
+    background-position: 0 -32px;
+}
+
+div.small-score > span[number='6'] {
+    background-position: -25px -32px;
+}
+
+div.small-score > span[number='7'] {
+    background-position: -50px -32px;
+}
+
+div.small-score > span[number='8'] {
+    background-position: -75px -32px;
+}
+
+div.small-score > span[number='9'] {
+    background-position: -100px -32px;
+}
