@@ -56,6 +56,16 @@ function go(timestamp) {
                 this.style.top = (-Math.random() * 350 - 50) + "px";
             });
         }
+        var points = document.querySelectorAll("#Trajectory > li");
+        for (var j = 0; j < points.length; ++j) {
+            var point = points.item(j);
+            point.addEventListener("webkitAnimationStart", function () {
+                this.style.top = (posY + 11) + "px";
+            });
+            point.addEventListener("webkitAnimationIteration", function () {
+                this.style.top = (posY + 11) + "px";
+            });
+        }
     }
     var t = (timestamp - time) / 100;
     posY -= speedY * t + a * t * t / 2;
