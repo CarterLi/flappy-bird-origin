@@ -69,7 +69,7 @@ function setScore(element, score, force) {
     var i = 1;
     for (; i <= 4; ++i) {
         var num = score % 10;
-        element.querySelector("span:nth-last-child(" + i + ")").setAttribute("number", num);
+        element.querySelector("span:nth-last-child(" + i + ")").dataset.number = num;
         score = Math.floor(score / 10);
         if (score === 0) {
             ++i;
@@ -77,7 +77,7 @@ function setScore(element, score, force) {
         }
     }
     for (; i <= 4; ++i) {
-        element.querySelector("span:nth-last-child(" + i + ")").removeAttribute("number");
+        delete element.querySelector("span:nth-last-child(" + i + ")").dataset.number;
     }
 }
 
