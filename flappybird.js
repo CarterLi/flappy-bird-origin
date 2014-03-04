@@ -1,4 +1,4 @@
-var startTime = null, time = null, speedY = 0, posY = 200, a = -9, oldScore = 0;
+var startTime = null, time = null, speedY = 0, posY = 200, a = -10, oldScore = 0;
 var bird = document.querySelector("#Bird"), birdStyle = bird.style;
 var Hit = document.querySelector("#Audio > audio.hit"),
     Wing = document.querySelector("#Audio > audio.wing"),
@@ -19,7 +19,17 @@ function game_start() {
 }
 
 function game_over() {
-    setScore(document.querySelector("#GameOver > div.score_board > div.score"), oldScore, true);
+    var highestScore = localStorage.getItem("highest_score");
+    if (oldScore && (!highestScore || oldScore > highestScore)) {
+        highestScore = oldScore;
+        localStorage.setItem("highest_score", oldScore);
+        document.querySelector("#GameOver > div.score_board > div.is-highest-score").style.visibility = "visible";
+    } else {
+        document.querySelector("#GameOver > div.score_board > div.is-highest-score").style.visibility = "hidden";
+    }
+
+    setScore(document.querySelector("#GameOver > div.score_board > div.score:first-child"), oldScore);
+    setScore(document.querySelector("#GameOver > div.score_board > div.score:last-child"), highestScore);
 
     document.querySelector("body").classList.add("end");
 
@@ -49,23 +59,7 @@ function removePipe() {
     nextPipe.addEventListener("transitionend", removePipe);
 }
 
-function setScore(element, score, force) {
-    if (score < 0) {
-        score = 0;
-    } else if (score > 9999) {
-        score = 9999;
-    }
-    if (score === oldScore && !force) {
-        return;
-    } else {
-        oldScore = score;
-    }
-
-    if (!force) {
-        Point.currentTime = 0;
-        Point.play();
-    }
-
+function setScore(element, score) {
     var i = 1;
     for (; i <= 4; ++i) {
         var num = score % 10;
@@ -107,9 +101,6 @@ function go(timestamp) {
     posY -= speedY * t + a * t * t / 2;
     if (posY < 0) {
         posY = 0;
-        if (speedY > 10) {
-            speedY = 10;
-        }
     } else if (posY > 464) {
         bird.style.top = "464px";
         Hit.play();
@@ -124,7 +115,18 @@ function go(timestamp) {
     birdStyle.top = posY + "px";
     time = timestamp;
 
-    setScore(document.getElementById("Score"), Math.floor(((timestamp - startTime) / 1000 - 4)));
+    var score = Math.floor(((timestamp - startTime) / 1000 - 4));
+    if (score < 0) {
+        score = 0;
+    } else if (score > 9999) {
+        score = 9999;
+    }
+    if (score !== oldScore) {
+        oldScore = score;
+        setScore(document.getElementById("Score"), score);
+        Point.currentTime = 0;
+        Point.play();
+    }
 
     window.requestAnimationFrame(go);
 }

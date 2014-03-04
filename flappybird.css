@@ -290,6 +290,18 @@ div#GameOver > div.score_board > div.score {
     padding-top: 52px;
 }
 
+    div#GameOver > div.score_board > div.is-highest-score {
+        background: url('Images/ScoreBoard.png') 0 -182px;
+        width: 48px;
+        height: 21px;
+        margin-top: 5px;
+        margin-left: 221px;
+    }
+
+    div#GameOver > div.score_board > div.score:last-child {
+        padding-top: 5px;
+    }
+
 div#GameOver > div.buttons {
     width: 348px;
     height: 100px;
