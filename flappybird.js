@@ -1,3 +1,5 @@
+"use strict";
+
 var startTime = null, time = null, speedY = 0, posY = 200, a = -10, oldScore = 0;
 var bird = document.querySelector("#Bird"), birdStyle = bird.style;
 var Hit = document.querySelector("#Audio > audio.hit"),

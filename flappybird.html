@@ -5,56 +5,58 @@
     <title>Flappy Bird</title>
     <link rel="stylesheet" href="flappybird.css"/>
 </head>
-<body class="ready">
-    <div id="Background">
-        <div id="Bird"></div>
-        <ul id="Pipes" class="clearfix">
-            <li><div></div></li>
-            <li><div></div></li>
-            <li><div></div></li>
-            <li><div></div></li>
-            <li><div></div></li>
-        </ul>
-        <ul id="Grounds" class="clearfix">
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-        <div class="wraper">
-            <ul id="Trajectory">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </div>
-        <div id="Score" class="score big-score"><span></span><span></span><span></span><span data-number="0"></span></div>
-        <div id="GetReady">
-            <div class="title"></div>
-            <div class="hint"></div>
-        </div>
-        <div id="GameOver">
-            <div class="title"></div>
-            <div class="score_board">
-                <div class="score small-score"><span></span><span></span><span></span><span></span></div>
-                <div class="is-highest-score"></div>
-                <div class="score small-score"><span></span><span></span><span></span><span></span></div>
+    <body class="ready">
+        <div id="Content">
+            <div id="Background">
+                <div id="Bird"></div>
+                <ul id="Pipes" class="clearfix">
+                    <li><div></div></li>
+                    <li><div></div></li>
+                    <li><div></div></li>
+                    <li><div></div></li>
+                    <li><div></div></li>
+                </ul>
+                <ul id="Grounds" class="clearfix">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                <div class="wraper">
+                    <ul id="Trajectory">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div id="Score" class="score big-score"><span></span><span></span><span></span><span data-number="0"></span></div>
+                <div id="GetReady">
+                    <div class="title"></div>
+                    <div class="hint"></div>
+                </div>
+                <div id="GameOver">
+                    <div class="title"></div>
+                    <div class="score_board">
+                        <div class="score small-score"><span></span><span></span><span></span><span></span></div>
+                        <div class="is-highest-score"></div>
+                        <div class="score small-score"><span></span><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="buttons clearfix">
+                        <a href="javascript:;" class="play"></a>
+                        <a href="javascript:;" class="score"></a>
+                    </div>
+                </div>
             </div>
-            <div class="buttons clearfix">
-                <a href="javascript:;" class="play"></a>
-                <a href="javascript:;" class="score"></a>
-            </div>
         </div>
-    </div>
-    <div id="Audio" hidden="hidden">
-        <audio class="hit" src="Sounds/Hit.wav"></audio>
-        <audio class="wing" src="Sounds/Wing.wav"></audio>
-        <audio class="die" src="Sounds/Die.wav"></audio>
-        <audio class="swooshing" src="Sounds/Swooshing.wav"></audio>
-        <audio class="point" src="Sounds/Point.wav"></audio>
-    </div>
-    <script type="text/javascript" src="flappybird.js"></script>
-</body>
+        <div id="Audio" hidden="hidden">
+            <audio class="hit" src="Sounds/Hit.wav"></audio>
+            <audio class="wing" src="Sounds/Wing.wav"></audio>
+            <audio class="die" src="Sounds/Die.wav"></audio>
+            <audio class="swooshing" src="Sounds/Swooshing.wav"></audio>
+            <audio class="point" src="Sounds/Point.wav"></audio>
+        </div>
+        <script type="text/javascript" src="flappybird.js"></script>
+    </body>
 </html>
