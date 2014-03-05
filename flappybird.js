@@ -38,10 +38,12 @@ function game_over() {
     document.removeEventListener("keypress", jump);
     document.getElementById("Background").removeEventListener("mousedown", jump);
 
-    Swooshing.play();
-    window.setTimeout(function () {
-        Swooshing.currentTime = 0;
+    window.setTimeout(function() {
         Swooshing.play();
+        window.setTimeout(function() {
+            Swooshing.currentTime = 0;
+            Swooshing.play();
+        }, 500);
     }, 500);
 }
 

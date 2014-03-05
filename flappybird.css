@@ -271,10 +271,10 @@ div#GameOver > div.title {
     -webkit-transform: translateY(0);
     transform: translateY(0);
 
-    -moz-transition: -moz-transform ease-in-out 0.5s;
-    -o-transition: -o-transform ease-in-out 0.5s;
-    -webkit-transition: -webkit-transform ease-in-out 0.5s;
-    transition: transform ease-in-out 0.5s;
+    -moz-transition: -moz-transform ease-in-out 0.5s 0.5s;
+    -o-transition: -o-transform ease-in-out 0.5s 0.5s;
+    -webkit-transition: -webkit-transform ease-in-out 0.5s 0.5s;
+    transition: transform ease-in-out 0.5s 0.5s;
 }
 
 body:not(.end) div#GameOver > div.title {
@@ -344,10 +344,10 @@ div#GameOver > div.buttons {
     -webkit-transform: translateY(0);
     transform: translateY(0);
 
-    -moz-transition: -moz-transform ease-in-out 0.5s 0.5s;
-    -o-transition: -o-transform ease-in-out 0.5s 0.5s;
-    -webkit-transition: -webkit-transform ease-in-out 0.5s 0.5s;
-    transition: transform ease-in-out 0.5s 0.5s;
+    -moz-transition: -moz-transform ease-in-out 0.5s 1s;
+    -o-transition: -o-transform ease-in-out 0.5s 1s;
+    -webkit-transition: -webkit-transform ease-in-out 0.5s 1s;
+    transition: transform ease-in-out 0.5s 1s;
 }
 
 body:not(.end) div#GameOver > div.score_board,
@@ -445,7 +445,6 @@ div#Score {
     top: 50px;
     width: 100%;
     height: 60px;
-    position: absolute;
     text-align: center;
 
     -moz-transition: opacity ease-in-out 1s;
@@ -456,4 +455,48 @@ div#Score {
 
 body.ready div#Score, body.end div#Score {
     opacity: 0;
+}
+
+#WhiteMask, #BlackMask {
+    z-index: 2000;
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+@keyframes ShowMask {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@-moz-keyframes ShowMask {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@-webkit-keyframes ShowMask {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+body.ready #BlackMask {
+    display: block;
+    background: black;
+    -moz-animation: ShowMask linear 0.5s forwards;
+    -o-animation: ShowMask linear 0.5s forwards;
+    -webkit-animation: ShowMask linear 0.5s forwards;
+    animation: ShowMask linear 0.5s forwards;
+}
+
+body.end #WhiteMask {
+    display: block;
+    background: white;
+    -moz-animation: ShowMask 0.2s ease-in-out 2 alternate-reverse forwards;
+    -o-animation: ShowMask 0.2s ease-in-out 2 alternate-reverse forwards;
+    -webkit-animation: ShowMask 0.2s ease-in-out 2 alternate-reverse forwards;
+    animation: ShowMask 0.2s ease-in-out 2 alternate-reverse forwards;
 }
