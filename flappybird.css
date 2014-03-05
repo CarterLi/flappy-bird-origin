@@ -304,7 +304,25 @@ div#GameOver > div.score_board > div.score {
         height: 21px;
         margin-top: 5px;
         margin-left: 221px;
+        -moz-transform: scale(1,1);
+        -ms-transform: scale(1,1);
+        -o-transform: scale(1,1);
+        -webkit-transform: scale(1,1);
+        transform: scale(1,1);
+
+        -moz-transition: -moz-transform ease-out 0.5s 1.5s;
+        -o-transition: -o-transform ease-out 0.5s 1.5s;
+        -webkit-transition: -webkit-transform ease-out 0.5s 1.5s;
+        transition: -moz-transform ease-out 0.5s 1.5s;
     }
+
+body:not(.end) div#GameOver > div.score_board > div.is-highest-score {
+    -moz-transform: scale(0,0);
+    -ms-transform: scale(0,0);
+    -o-transform: scale(0,0);
+    -webkit-transform: scale(0,0);
+    transform: scale(0,0);
+}
 
     div#GameOver > div.score_board > div.score:last-child {
         padding-top: 5px;
