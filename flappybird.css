@@ -483,7 +483,7 @@ body.ready div#Score, body.end div#Score {
     opacity: 0;
 }
 
-#WhiteMask, #BlackMask {
+#Mask {
     z-index: 2000;
     position: absolute;
     display: none;
@@ -509,7 +509,7 @@ body.ready div#Score, body.end div#Score {
     to { opacity: 0; }
 }
 
-body.ready #BlackMask {
+body.ready #Mask {
     display: block;
     background: black;
     -moz-animation: ShowMask linear 0.5s forwards;
@@ -518,7 +518,7 @@ body.ready #BlackMask {
     animation: ShowMask linear 0.5s forwards;
 }
 
-body.end #WhiteMask {
+body.end #Mask {
     display: block;
     background: white;
     -moz-animation: ShowMask 0.2s ease-in-out 2 alternate-reverse forwards;
