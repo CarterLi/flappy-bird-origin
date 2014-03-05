@@ -25,7 +25,7 @@ function game_over() {
     document.getElementById("Background").removeEventListener("mousedown", jump);
 
     var highestScore = localStorage.getItem("highest_score");
-    setScore(document.querySelector("#GameOver > div.score_board > div.score:last-child"), highestScore);
+    setScore(document.querySelector("#GameOver > div.score_board > div.highest-score > div.old"), highestScore);
 
     if (oldScore > 0) {
         document.querySelector("#GameOver > div.score_board").addEventListener("transitionend", function (e) {
@@ -41,7 +41,7 @@ function game_over() {
                     if (oldScore > highestScore) {
                         localStorage.setItem("highest_score", oldScore);
                         window.setTimeout(function () {
-                            setScore(document.querySelector("#GameOver > div.score_board > div.score:last-child"), oldScore);
+                            setScore(document.querySelector("#GameOver > div.score_board > div.highest-score > div.new"), oldScore);
                             document.querySelector("#GameOver > div.score_board > div.is-highest-score").classList.add("show");
                         }, 50);
                     }
