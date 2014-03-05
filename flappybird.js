@@ -21,26 +21,40 @@ function game_start() {
 }
 
 function game_over() {
-    var highestScore = localStorage.getItem("highest_score");
-    if (oldScore && (!highestScore || oldScore > highestScore)) {
-        highestScore = oldScore;
-        localStorage.setItem("highest_score", oldScore);
-        document.querySelector("#GameOver > div.score_board > div.is-highest-score").style.visibility = "visible";
-    } else {
-        document.querySelector("#GameOver > div.score_board > div.is-highest-score").style.visibility = "hidden";
-    }
-
-    setScore(document.querySelector("#GameOver > div.score_board > div.score:first-child"), oldScore);
-    setScore(document.querySelector("#GameOver > div.score_board > div.score:last-child"), highestScore);
-
-    document.querySelector("body").classList.add("end");
-
     document.removeEventListener("keypress", jump);
     document.getElementById("Background").removeEventListener("mousedown", jump);
 
-    window.setTimeout(function() {
+    var highestScore = localStorage.getItem("highest_score");
+    setScore(document.querySelector("#GameOver > div.score_board > div.score:last-child"), highestScore);
+
+    if (oldScore > 0) {
+        document.querySelector("#GameOver > div.score_board").addEventListener("transitionend", function (e) {
+            if (!e.target.classList.contains("score_board"))
+                return;
+
+            var scoreElement = document.querySelector("#GameOver > div.score_board > div.score:first-child");
+            var scoreNum = 1;
+            var interval = window.setInterval(function() {
+                setScore(scoreElement, scoreNum);
+                if (++scoreNum > oldScore) {
+                    window.clearInterval(interval);
+                    if (oldScore > highestScore) {
+                        localStorage.setItem("highest_score", oldScore);
+                        window.setTimeout(function () {
+                            setScore(document.querySelector("#GameOver > div.score_board > div.score:last-child"), oldScore);
+                            document.querySelector("#GameOver > div.score_board > div.is-highest-score").classList.add("show");
+                        }, 50);
+                    }
+                }
+            }, 25);
+        });
+    }
+
+    document.querySelector("body").classList.add("end");
+
+    window.setTimeout(function () {
         Swooshing.play();
-        window.setTimeout(function() {
+        window.setTimeout(function () {
             Swooshing.currentTime = 0;
             Swooshing.play();
         }, 500);
