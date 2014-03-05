@@ -325,15 +325,23 @@ div#GameOver > div.buttons {
     }
 
         div#GameOver > div.buttons > a:hover {
-            background-position-y: -105px;
+            background-position: 0 -105px;
         }
 
         div#GameOver > div.buttons > a:active {
-            background-position-y: -210px;
+            background-position: 0 -210px;
         }
 
         div#GameOver > div.buttons > a.score {
-            background-position-x: -180px;
+            background-position: -180px 0;
+        }
+
+        div#GameOver > div.buttons > a.score:hover {
+            background-position: -180px -105px;
+        }
+
+        div#GameOver > div.buttons > a.score:active {
+            background-position: -180px -210px;
         }
 
 div#GameOver > div.score_board,

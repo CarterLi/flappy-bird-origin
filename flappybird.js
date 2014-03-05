@@ -80,25 +80,29 @@ function setScore(element, score) {
 }
 
 function go(timestamp) {
+    var event;
     if (time === null) {
         startTime = time = timestamp;
         var pipes = document.querySelectorAll("#Pipes > li");
         for (var i = 0; i < pipes.length; ++i) {
             var pipe = pipes.item(i);
             pipe.style.top = (-Math.random() * 350 - 100) + "px";
-            pipe.addEventListener("webkitAnimationIteration", function () {
+            event = function() {
                 this.style.top = (-Math.random() * 350 - 50) + "px";
-            });
+            };
+            pipe.addEventListener("webkitAnimationIteration", event);
+            pipe.addEventListener("animationiteration", event);
         }
         var points = document.querySelectorAll("#Trajectory > li");
         for (var j = 0; j < points.length; ++j) {
             var point = points.item(j);
-            point.addEventListener("webkitAnimationStart", function () {
+            event = function() {
                 this.style.top = (posY + 11) + "px";
-            });
-            point.addEventListener("webkitAnimationIteration", function () {
-                this.style.top = (posY + 11) + "px";
-            });
+            };
+            point.addEventListener("webkitAnimationStart", event);
+            point.addEventListener("webkitAnimationIteration", event);
+            point.addEventListener("animationstart", event);
+            point.addEventListener("animationiteration", event);
         }
     }
     var t = (timestamp - time) / 100;
