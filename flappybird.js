@@ -114,11 +114,20 @@ function moveBird(timestamp) {
 }
 
 function judge() {
-    if (nearestPipe.offsetLeft <= bird.offsetLeft) {
+    //        |    |
+    //        |    |
+    //        ------
+    //          X
+    //        ------
+    //        |    |
+    //        |    |
+    //=======================
+
+    if (nearestPipe.offsetLeft <= bird.offsetLeft + bird.offsetWidth) {
         if (nearestPipe.offsetLeft + nearestPipe.offsetWidth >= bird.offsetLeft) {
             var emptySpace = nearestPipe.firstElementChild;
             var pipeTop = nearestPipe.offsetTop;
-            if (bird.offsetTop < emptySpace.offsetTop + pipeTop || bird.offsetTop > emptySpace.offsetTop + emptySpace.offsetHeight + pipeTop) {
+            if (bird.offsetTop < emptySpace.offsetTop + pipeTop || bird.offsetTop + bird.offsetHeight > emptySpace.offsetTop + emptySpace.offsetHeight + pipeTop) {
                 audios.Hit.play();
                 return true;
             }
