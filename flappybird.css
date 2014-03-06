@@ -26,13 +26,19 @@
 }
 
 div#Content {
-    position: absolute;
-    top: calc(50% - 600px / 2);
-    left: calc(50% - 800px / 2);
+    margin: 0 auto;
     width: 800px;
     height: 600px;
     overflow: hidden;
     box-shadow:  black 0 0 10px;
+}
+
+@media (min-width: 800px) and (min-height: 600px) {
+    div#Content {
+        position: absolute;
+        top: calc(50% - 600px / 2);
+        left: calc(50% - 800px / 2);
+    }
 }
 
 div#Background {
