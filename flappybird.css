@@ -9,7 +9,6 @@
     user-select: none;
 }
 
-    *.paused, *.paused *,
     body.ready ul#Pipes > li, body.ready ul#Trajectory > li,
     body.end ul#Pipes > li, body.end ul#Grounds, body.end ul#Trajectory > li, body.end div#Bird {
         -moz-animation-play-state: paused !important;
@@ -558,4 +557,19 @@ body.end #Mask {
     -o-animation: ShowMask 0.2s ease-in-out 2 alternate-reverse forwards;
     -webkit-animation: ShowMask 0.2s ease-in-out 2 alternate-reverse forwards;
     animation: ShowMask 0.2s ease-in-out 2 alternate-reverse forwards;
+}
+
+body.end div#Bird {
+    top: 464px;
+
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+
+    -moz-transition: -moz-transform ease-in .2s, top ease-in 1s;
+    -o-transition: -o-transform ease-in .2s, top ease-in 1s;
+    -webkit-transition: -webkit-transform ease-in .2s, top ease-in 1s;
+    transition: transform ease-in .2s, top ease-in 1s;
 }

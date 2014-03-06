@@ -54,6 +54,7 @@ function game_over() {
     }
 
     document.querySelector("body").classList.add("end");
+    bird.style.transform = bird.style.webkitTransform = bird.style.top = null;
 
     window.setTimeout(function () {
         audios.Swooshing.play();
