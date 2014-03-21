@@ -66,7 +66,7 @@ function game_over() {
 }
 
 function jump() {
-    bird.speedY = 40;
+    bird.speedY = 30;
     audios.Wing.currentTime = 0;
     audios.Wing.play();
 }
@@ -168,7 +168,7 @@ function go(timestamp) {
     var pipes = document.querySelectorAll("#Pipes > li");
     for (var i = 0; i < pipes.length; ++i) {
         var pipe = pipes.item(i);
-        pipe.style.top = (-Math.random() * 350 - 100) + "px";
+        pipe.style.top = (-Math.random() * 250 - 100) + "px";
         event = function () {
             this.style.top = (-Math.random() * 350 - 50) + "px";
         };
