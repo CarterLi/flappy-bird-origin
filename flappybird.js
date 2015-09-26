@@ -11,12 +11,26 @@ var audios = {
     Point: document.querySelector("#Audio > audio.point")
 };
 
-function game_start() {
-    document.removeEventListener("keypress", game_start);
-    document.getElementById("Background").removeEventListener("mousedown", game_start);
+function gameStart() {
+    document.getElementById("EnableTrajectory").disabled = true;
+    if (document.getElementById("EnableTrajectory").checked) {
+        Array.prototype.forEach.call(document.querySelectorAll("#Trajectory > li"), function(point) {
+            var event = function pointEvent() {
+                this.style.marginTop = (bird.positionY + 11) + "px";
+            };
+            point.addEventListener("animationstart", event);
+            point.addEventListener("animationiteration", event);
+        });
+    }
+    
+    document.removeEventListener("keypress", gameStart);
+    document.getElementById("Background").removeEventListener("mousedown", gameStart);
     document.addEventListener("keypress", jump);
     document.getElementById("Background").addEventListener("mousedown", jump);
 
+    document.getElementById("GetReady").addEventListener("transitionend", function() {
+        this.setAttribute('hidden', '');
+    });
     document.body.classList.remove("ready");
 
     jump();
@@ -32,7 +46,7 @@ function game_over() {
     setScore(document.querySelector("#GameOver > div.score_board > div.highest-score > div.old"), highestScore);
 
     if (currentScore > 0) {
-        document.querySelector("#GameOver > div.score_board").addEventListener("transitionend", function (e) {
+        document.querySelector("#GameOver > div.score_board").addEventListener("animationend", function (e) {
             if (!e.target.classList.contains("score_board"))
                 return;
 
@@ -104,7 +118,7 @@ function moveBird(timestamp) {
     if (bird.positionY < 0) {
         bird.positionY = 0;
     } else if (bird.positionY > 464) {
-        bird.style.transform = "translateY(464px) rotate(" + (-bird.speedY) + "deg) translateZ(0)";
+        bird.style.transform = "translateY(464px) rotate(" + (-bird.speedY) + "deg)";
         audios.Hit.play();
         return true;
     }
@@ -112,7 +126,7 @@ function moveBird(timestamp) {
     if (bird.speedY < -40) {
         bird.speedY = -40;
     }
-    bird.style.transform = "translateY(" + bird.positionY + "px) rotate(" + (-bird.speedY) + "deg) translateZ(0)";
+    bird.style.transform = "translateY(" + bird.positionY + "px) rotate(" + (-bird.speedY) + "deg)";
 }
 
 function judge() {
@@ -158,32 +172,20 @@ function go(timestamp) {
 }
 
 (function() {
-    document.addEventListener("keypress", game_start);
-    document.getElementById("Background").addEventListener("mousedown", game_start);
+    document.addEventListener("keypress", gameStart);
+    document.getElementById("Background").addEventListener("mousedown", gameStart);
 
     document.querySelector("#GameOver a.play").addEventListener("click", function () {
         window.location.reload();
     });
 
-    var event;
-    var pipes = document.querySelectorAll("#Pipes > li");
-    for (var i = 0; i < pipes.length; ++i) {
-        var pipe = pipes.item(i);
+    Array.prototype.forEach.call(document.querySelectorAll("#Pipes > li"), function(pipe) {
         pipe.style.marginTop = (-Math.random() * 250 - 100) + "px";
-        event = function () {
+        var event = function pipeEvent() {
             this.style.marginTop = (-Math.random() * 350 - 50) + "px";
         };
         pipe.addEventListener("animationiteration", event);
-    }
-    var points = document.querySelectorAll("#Trajectory > li");
-    for (var j = 0; j < points.length; ++j) {
-        var point = points.item(j);
-        event = function () {
-            this.style.marginTop = (bird.positionY + 11) + "px";
-        };
-        point.addEventListener("animationstart", event);
-        point.addEventListener("animationiteration", event);
-    }
+    });
 
     bird.speedY = 0;
     bird.positionY = parseFloat(getComputedStyle(bird).transform.substring(22));

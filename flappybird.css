@@ -19,7 +19,7 @@ html, body {
         animation-play-state: paused !important;
     }
 
-    body.ready #Trajectory, body.ready #GameOver {
+    body.ready #Trajectory, body.end #GetReady, body:not(.end) #GameOver {
         display: none;
     }
 
@@ -58,14 +58,14 @@ html, body {
     position: absolute;
     left: 150px;
     top: 0;
-    transform: translateY(200px) translateZ(0);
-    z-index: 400;
+    transform: translateY(200px);
+    z-index: 600;
     animation: BirdFly .3s steps(1) infinite alternate;
     will-change: background-position;
 }
 
 @keyframes MovePipes {
-    to { transform: translateX(-52px) translateZ(0); }
+    to { transform: translateX(-52px); }
 }
 
 #Pipes {
@@ -75,11 +75,12 @@ html, body {
 }
 
     #Pipes > li {
-        transform: translateX(852px) translateZ(0);
+        transform: translateX(852px);
         animation: MovePipes 5s infinite linear;
         float: left;
         width: 0;
         height: 1000px;
+        position: relative;
     }
 
         #Pipes > li:nth-child(1) {
@@ -125,8 +126,7 @@ html, body {
 
 
 @keyframes MoveGround {
-    from { transform: translateZ(0); }
-    to { transform: translateX(-168px) translateZ(0); }
+    to { transform: translateX(-168px); }
 }
 
 #Grounds {
@@ -154,7 +154,7 @@ body:not(.ready) #GetReady {
     position: absolute;
     top: 0;
     width: 100%;
-    z-index: 500;
+    z-index: 600;
 }
 
     #GetReady > div.title {
@@ -170,9 +170,9 @@ body:not(.ready) #GetReady {
         margin: 60px auto;
         background: url('Images/Hint.png') 0 -170px;
     }
-
-body:not(.end) #GameOver {
-    z-index: -1000;
+    
+@keyframes ShowGameOver {
+    to { transform: none; }
 }
 
 #GameOver > div.title {
@@ -180,12 +180,8 @@ body:not(.end) #GameOver {
     height: 82px;
     margin: 60px auto 0;
     background: url('Images/Hint.png') 0 -90px;
-    transform: translateY(0);
-    transition: transform ease-in-out 0.5s 0.5s;
-}
-
-body:not(.end) #GameOver > div.title {
     transform: translateY(-142px);
+    animation: ShowGameOver ease-in-out 0.5s 0.5s forwards;
 }
 
 #GameOver > div.score_board {
@@ -277,39 +273,33 @@ body:not(.end) #GameOver > div.title {
 
 #GameOver > div.score_board,
 #GameOver > div.buttons {
-    transform: translateY(0);
-    transition: transform ease-in-out 0.5s 1s;
-}
-
-body:not(.end) #GameOver > div.score_board,
-body:not(.end) #GameOver > div.buttons {
     transform: translateY(425px);
-}
-
-div.wraper {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    animation: ShowGameOver ease-in-out 0.5s 1s forwards;
 }
 
 @keyframes MovePoints {
-    to { transform: translateZ(0); }
+    to { transform: none; }
+}
+
+#EnableTrajectory:not(:checked) ~ #Background #Trajectory {
+    display: none;
 }
 
 #Trajectory {
     width: 152px;
     height: 100%;
-    position: relative;
+    left: 0;
+    top: 0;
+    position: absolute;
     overflow: hidden;
-    z-index: 600;
+    z-index: 480;
 }
 
 #Trajectory > li {
     position: absolute;
     display: block;
     margin-top: 211px;
-    transform: translateX(154px) translateZ(0);
+    transform: translateX(154px);
     width: 0;
     height: 0;
     animation: MovePoints 0.82964601769911s infinite linear;
@@ -388,6 +378,6 @@ body.end #Mask {
 }
 
 body.end #Bird {
-    transform: translateY(464px) rotate(90deg) translateZ(0);
+    transform: translateY(464px) rotate(90deg);
     transition: transform ease-in 1s;
 }

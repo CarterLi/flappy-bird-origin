@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="flappybird.css"/>
 </head>
     <body class="ready">
-        <div id="fps"></div>
+        <div id="fps">??? FPS</div>
+        <label for="EnableTrajectory">Enable trajectory:</label>
+        <input type="checkbox" id="EnableTrajectory" checked />
         <div id="Background">
             <div id="Bird"></div>
             <ul id="Pipes">
@@ -16,21 +18,19 @@
                 <li><div></div></li>
                 <li><div></div></li>
             </ul>
-            <ul id="Grounds" class="clearfix">
+            <ul id="Grounds">
                 <li></li>
                 <li></li>
                 <li></li>
             </ul>
-            <div class="wraper">
-                <ul id="Trajectory">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div>
+            <ul id="Trajectory">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
             <div id="Score" class="score big-score"><span></span><span></span><span></span><span data-number="0"></span></div>
             <div id="GetReady">
                 <div class="title"></div>
