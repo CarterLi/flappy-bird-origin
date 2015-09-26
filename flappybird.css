@@ -19,6 +19,10 @@ html, body {
         animation-play-state: paused !important;
     }
 
+    body.ready #Trajectory, body.ready #GameOver {
+        display: none;
+    }
+
 .clearfix::before,
 .clearfix::after {
     content: "";
@@ -71,14 +75,11 @@ html, body {
 }
 
     #Pipes > li {
-        position: absolute;
-        width: 52px;
-        height: 1000px;
-        left: 0;
         transform: translateX(852px) translateZ(0);
-        display: block;
         animation: MovePipes 5s infinite linear;
-        z-index: 100;
+        float: left;
+        width: 0;
+        height: 1000px;
     }
 
         #Pipes > li:nth-child(1) {
@@ -106,10 +107,12 @@ html, body {
             display: block;
             background: url('Images/Pipe_Top.png');
             height: 420px;
+            width: 52px;
         }
 
         #Pipes > li > div {
             height: 120px;
+            width: 52px;
         }
 
         #Pipes > li::after {
@@ -117,6 +120,7 @@ html, body {
             display: block;
             background: url('Images/Pipe_Bottom.png');
             height: 420px;
+            width: 52px;
         }
 
 
@@ -298,23 +302,28 @@ div.wraper {
     height: 100%;
     position: relative;
     overflow: hidden;
+    z-index: 600;
 }
 
 #Trajectory > li {
     position: absolute;
     display: block;
-    left: 0;
-    top: 211px;
+    margin-top: 211px;
     transform: translateX(154px) translateZ(0);
-    border-radius: 50%;
-    width: 3px;
-    height: 3px;
-    box-shadow: black 0 0 3px;
-    border: 1px solid white;
-    background: white;
-    z-index: 600;
+    width: 0;
+    height: 0;
     animation: MovePoints 0.82964601769911s infinite linear;
 }
+    #Trajectory > li::before {
+        content: "";
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        box-shadow: black 0 0 3px;
+        border: 1px solid white;
+        background: white;
+        display: block;
+    }
 
     #Trajectory > li:nth-child(2) {
         animation-delay: 0.13827433628319s;

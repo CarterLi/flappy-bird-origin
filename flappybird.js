@@ -126,7 +126,7 @@ function judge() {
     //=======================
     var pipeOffsetLeft = parseFloat(getComputedStyle(nearestPipe).transform.substring(19));
     if (pipeOffsetLeft <= bird.offsetLeft + bird.offsetWidth) {
-        if (pipeOffsetLeft + nearestPipe.offsetWidth >= bird.offsetLeft) {
+        if (pipeOffsetLeft + nearestPipe.scrollWidth >= bird.offsetLeft) {
             var emptySpace = nearestPipe.firstElementChild;
             var pipeTop = nearestPipe.offsetTop;
             if (bird.positionY < emptySpace.offsetTop + pipeTop || bird.positionY + bird.offsetHeight > emptySpace.offsetTop + emptySpace.offsetHeight + pipeTop) {
@@ -169,9 +169,9 @@ function go(timestamp) {
     var pipes = document.querySelectorAll("#Pipes > li");
     for (var i = 0; i < pipes.length; ++i) {
         var pipe = pipes.item(i);
-        pipe.style.top = (-Math.random() * 250 - 100) + "px";
+        pipe.style.marginTop = (-Math.random() * 250 - 100) + "px";
         event = function () {
-            this.style.top = (-Math.random() * 350 - 50) + "px";
+            this.style.marginTop = (-Math.random() * 350 - 50) + "px";
         };
         pipe.addEventListener("animationiteration", event);
     }
@@ -179,7 +179,7 @@ function go(timestamp) {
     for (var j = 0; j < points.length; ++j) {
         var point = points.item(j);
         event = function () {
-            this.style.top = (bird.positionY + 11) + "px";
+            this.style.marginTop = (bird.positionY + 11) + "px";
         };
         point.addEventListener("animationstart", event);
         point.addEventListener("animationiteration", event);
