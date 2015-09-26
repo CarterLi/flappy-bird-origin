@@ -9,11 +9,13 @@
     user-select: none;
 }
 
-    body.ready ul#Pipes > li, body.ready ul#Trajectory > li,
-    body.end ul#Pipes > li, body.end ul#Grounds, body.end ul#Trajectory > li, body.end div#Bird {
-        -moz-animation-play-state: paused !important;
-        -o-animation-play-state: paused !important;
-        -webkit-animation-play-state: paused !important;
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+    body.ready #Pipes > li, body.ready #Trajectory > li,
+    body.end #Pipes > li, body.end #Grounds, body.end #Trajectory > li, body.end #Bird {
         animation-play-state: paused !important;
     }
 
@@ -24,173 +26,93 @@
     clear: both;
 }
 
-div#Content {
-    margin: 0 auto;
+#Background {
+    margin: auto;
     width: 800px;
     height: 600px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     overflow: hidden;
     box-shadow:  black 0 0 10px;
-}
-
-@media (min-width: 800px) and (min-height: 600px) {
-    div#Content {
-        position: absolute;
-        top: calc(50% - 600px / 2);
-        left: calc(50% - 800px / 2);
-    }
-}
-
-div#Background {
-    width: 100%;
-    height: 100%;
     background: url('Images/Background.png');
-    position: relative;
+    position: absolute;
 }
 
 @keyframes BirdFly {
     from { background-position: -2px -8px; }
-    25% { background-position: -2px -8px; }
-
-    25.00001% { background-position: -42px -8px; }
-    50% { background-position: -42px -8px; }
-
-    50.00001% { background-position: -82px -8px; }
-    75% { background-position: -82px -8px; }
-
-    75.00001% { background-position: -42px -8px; }
-    to { background-position: -42px -8px; }
+    33.34% { background-position: -42px -8px; }
+    66.67% { background-position: -82px -8px; }
 }
 
-@-moz-keyframes BirdFly {
-    from { background-position: -2px -8px; }
-    25% { background-position: -2px -8px; }
-
-    25.00001% { background-position: -42px -8px; }
-    50% { background-position: -42px -8px; }
-
-    50.00001% { background-position: -82px -8px; }
-    75% { background-position: -82px -8px; }
-
-    75.00001% { background-position: -42px -8px; }
-    to { background-position: -42px -8px; }
-}
-
-@-webkit-keyframes BirdFly {
-    from { background-position-x: -2px; }
-    25% { background-position-x: -2px; }
-
-    25.00001% { background-position-x: -42px; }
-    50% { background-position-x: -42px; }
-
-    50.00001% { background-position-x: -82px; }
-    75% { background-position-x: -82px; }
-
-    75.00001% { background-position-x: -42px; }
-    to { background-position-x: -42px; }
-}
-
-div#Bird {
+#Bird {
     width: 36px;
     height: 25px;
     background: url('Images/Birds.png') -2px -8px;
     overflow: hidden;
     position: absolute;
     left: 150px;
-    top: 200px;
-    z-index: 1000;
-
-    -moz-animation: BirdFly .3s linear infinite;
-    -o-animation: BirdFly .3s linear infinite;
-    -webkit-animation: BirdFly .3s linear infinite;
-    animation: BirdFly .3s linear infinite;
-}
-
-div#Background > ul > li {
-    float: left;
-    display: block;
+    top: 0;
+    transform: translateY(200px) translateZ(0);
+    z-index: 400;
+    animation: BirdFly .3s steps(1) infinite alternate;
+    will-change: background-position;
 }
 
 @keyframes MovePipes {
-    from { left: 852px; }
-    to { left: -52px; }
+    to { transform: translateX(-52px) translateZ(0); }
 }
 
-@-moz-keyframes MovePipes {
-    from { left: 852px; }
-    to { left: -52px; }
-}
-
-@-webkit-keyframes MovePipes {
-    from { left: 852px; }
-    to { left: -52px; }
-}
-
-ul#Pipes {
+#Pipes {
     position: relative;
     width: 100%;
     height: 100%;
 }
 
-    ul#Pipes > li {
+    #Pipes > li {
         position: absolute;
         width: 52px;
         height: 1000px;
-        left: 852px;
+        left: 0;
+        transform: translateX(852px) translateZ(0);
         display: block;
-
-        -moz-animation: MovePipes 5s infinite linear;
-        -o-animation: MovePipes 5s infinite linear;
-        -webkit-animation: MovePipes 5s infinite linear;
         animation: MovePipes 5s infinite linear;
+        z-index: 100;
     }
 
-        ul#Pipes > li:nth-child(1) {
-            -moz-animation-delay: 1s;
-            -o-animation-delay: 1s;
-            -webkit-animation-delay: 1s;
+        #Pipes > li:nth-child(1) {
             animation-delay: 1s;
         }
 
-        ul#Pipes > li:nth-child(2) {
-            -moz-animation-delay: 2s;
-            -o-animation-delay: 2s;
-            -webkit-animation-delay: 2s;
+        #Pipes > li:nth-child(2) {
             animation-delay: 2s;
         }
 
-        ul#Pipes > li:nth-child(3) {
-            -moz-animation-delay: 3s;
-            -o-animation-delay: 3s;
-            -webkit-animation-delay: 3s;
+        #Pipes > li:nth-child(3) {
             animation-delay: 3s;
         }
 
-        ul#Pipes > li:nth-child(4) {
-            -moz-animation-delay: 4s;
-            -o-animation-delay: 4s;
-            -webkit-animation-delay: 4s;
+        #Pipes > li:nth-child(4) {
             animation-delay: 4s;
         }
 
-        ul#Pipes > li:nth-child(5) {
-            -moz-animation-delay: 5s;
-            -o-animation-delay: 5s;
-            -webkit-animation-delay: 5s;
+        #Pipes > li:nth-child(5) {
             animation-delay: 5s;
         }
 
-        ul#Pipes > li::before {
+        #Pipes > li::before {
             content: "";
             display: block;
             background: url('Images/Pipe_Top.png');
             height: 420px;
         }
 
-        ul#Pipes > li > div {
+        #Pipes > li > div {
             height: 120px;
         }
 
-        ul#Pipes > li::after {
+        #Pipes > li::after {
             content: "";
             display: block;
             background: url('Images/Pipe_Bottom.png');
@@ -199,129 +121,99 @@ ul#Pipes {
 
 
 @keyframes MoveGround {
-    from { margin-left: 0; }
-    to { margin-left: -168px; }
+    from { transform: translateZ(0); }
+    to { transform: translateX(-168px) translateZ(0); }
 }
 
-@-moz-keyframes MoveGround {
-    from { margin-left: 0; }
-    to { margin-left: -168px; }
-}
-
-@-webkit-keyframes MoveGround {
-    from { margin-left: 0; }
-    to { margin-left: -168px; }
-}
-
-ul#Grounds {
+#Grounds {
     position: absolute;
+    z-index: 200;
     bottom: 0;
     width: 1500px;
-
-    -moz-animation: MoveGround 0.92307692307s linear infinite;
-    -o-animation: MoveGround 0.92307692307s linear infinite;
-    -webkit-animation: MoveGround 0.92307692307s linear infinite;
     animation: MoveGround 0.92307692307s linear infinite;
 }
 
-    ul#Grounds > li {
+    #Grounds > li {
         background: url('Images/Ground.png');
         width: 336px;
         height: 112px;
+        float: left;
+        display: block;
     }
 
-body:not(.ready) div#GetReady {
+body:not(.ready) #GetReady {
     opacity: 0;
-    -moz-transition: opacity ease-in-out 1s;
-    -o-transition: opacity ease-in-out 1s;
-    -webkit-transition: opacity ease-in-out 1s;
     transition: opacity ease-in-out 1s;
 }
 
-div#GetReady, div#GameOver {
+#GetReady, #GameOver {
     position: absolute;
     top: 0;
     width: 100%;
+    z-index: 500;
 }
 
-    div#GetReady > div.title {
+    #GetReady > div.title {
         width: 300px;
         height: 90px;
         margin: 60px auto;
         background: url('Images/Hint.png');
     }
 
-    div#GetReady > div.hint {
+    #GetReady > div.hint {
         width: 230px;
         height: 150px;
         margin: 60px auto;
         background: url('Images/Hint.png') 0 -170px;
     }
 
-body:not(.end) div#GameOver {
+body:not(.end) #GameOver {
     z-index: -1000;
 }
 
-div#GameOver > div.title {
+#GameOver > div.title {
     width: 300px;
     height: 82px;
     margin: 60px auto 0;
     background: url('Images/Hint.png') 0 -90px;
-    
-    -moz-transform: translateY(0);
-    -ms-transform: translateY(0);
-    -o-transform: translateY(0);
-    -webkit-transform: translateY(0);
     transform: translateY(0);
-
-    -moz-transition: -moz-transform ease-in-out 0.5s 0.5s;
-    -o-transition: -o-transform ease-in-out 0.5s 0.5s;
-    -webkit-transition: -webkit-transform ease-in-out 0.5s 0.5s;
     transition: transform ease-in-out 0.5s 0.5s;
 }
 
-body:not(.end) div#GameOver > div.title {
-    -moz-transform: translateY(-142px);
-    -ms-transform: translateY(-142px);
-    -o-transform: translateY(-142px);
-    -webkit-transform: translateY(-142px);
+body:not(.end) #GameOver > div.title {
     transform: translateY(-142px);
 }
 
-div#GameOver > div.score_board {
+#GameOver > div.score_board {
     width: 348px;
     height: 182px;
     margin: 30px auto 0;
     background: url('Images/ScoreBoard.png');
 }
 
-div#GameOver > div.score_board > div.score {
+#GameOver > div.score_board > div.score {
     width: 100%;
     height: 32px;
     padding-top: 52px;
 }
 
-    div#GameOver > div.score_board > div.is-highest-score {
+    #GameOver > div.score_board > div.is-highest-score {
         background: url('Images/ScoreBoard.png') 0 -182px;
         width: 48px;
         height: 21px;
         margin-top: 5px;
         margin-left: 221px;
-        -moz-transform: scale(0);
-        -ms-transform: scale(0);
-        -o-transform: scale(0);
-        -webkit-transform: scale(0);
         transform: scale(0);
     }
 
-    div#GameOver > div.score_board > div.highest-score {
+    #GameOver > div.score_board > div.highest-score {
         margin-top: 5px;
         width: 100%;
         height: 32px;
         position: relative;
     }
 
-    div#GameOver > div.score_board > div.highest-score > div.score {
+    #GameOver > div.score_board > div.highest-score > div.score {
         width: 100%;
         height: 100%;
         position: absolute;
@@ -329,44 +221,29 @@ div#GameOver > div.score_board > div.score {
         left: 0;
     }
 
-    div#GameOver > div.score_board > div.highest-score > div.score.new,
-    div#GameOver > div.score_board > div.is-highest-score.show + div.highest-score > div.score.old {
-        -moz-transform: scale(0);
-        -ms-transform: scale(0);
-        -o-transform: scale(0);
-        -webkit-transform: scale(0);
+    #GameOver > div.score_board > div.highest-score > div.score.new,
+    #GameOver > div.score_board > div.is-highest-score.show + div.highest-score > div.score.old {
         transform: scale(0);
     }
 
-    div#GameOver > div.score_board > div.is-highest-score.show,
-    div#GameOver > div.score_board > div.highest-score > div.score {
-        -moz-transition: -moz-transform ease-out 0.3s;
-        -o-transition: -o-transform ease-out 0.3s;
-        -webkit-transition: -webkit-transform ease-out 0.3s;
-        transition: -moz-transform ease-out 0.3s;
+    #GameOver > div.score_board > div.is-highest-score.show,
+    #GameOver > div.score_board > div.highest-score > div.score {
+        transition: transform ease-out 0.3s;
     }
     
-    div#GameOver > div.score_board > div.is-highest-score.show,
-    div#GameOver > div.score_board > div.is-highest-score.show + div.highest-score > div.score.new {
-        -moz-transform: scale(1);
-        -ms-transform: scale(1);
-        -o-transform: scale(1);
-        -webkit-transform: scale(1);
+    #GameOver > div.score_board > div.is-highest-score.show,
+    #GameOver > div.score_board > div.is-highest-score.show + div.highest-score > div.score.new {
         transform: scale(1);
-        
-        -moz-transition-delay: 0.3s;
-        -o-transition-delay: 0.3s;
-        -webkit-transition-delay: 0.3s;
         transition-delay: 0.3s;
     }
 
-div#GameOver > div.buttons {
+#GameOver > div.buttons {
     width: 348px;
     height: 100px;
     margin: 45px auto 0;
 }
 
-    div#GameOver > div.buttons > a {
+    #GameOver > div.buttons > a {
         float: left;
         display: block;
         width: 174px;
@@ -374,46 +251,34 @@ div#GameOver > div.buttons {
         background: url('Images/Buttons.png');
     }
 
-        div#GameOver > div.buttons > a:hover {
+        #GameOver > div.buttons > a:hover {
             background-position: 0 -105px;
         }
 
-        div#GameOver > div.buttons > a:active {
+        #GameOver > div.buttons > a:active {
             background-position: 0 -210px;
         }
 
-        div#GameOver > div.buttons > a.score {
+        #GameOver > div.buttons > a.score {
             background-position: -180px 0;
         }
 
-        div#GameOver > div.buttons > a.score:hover {
+        #GameOver > div.buttons > a.score:hover {
             background-position: -180px -105px;
         }
 
-        div#GameOver > div.buttons > a.score:active {
+        #GameOver > div.buttons > a.score:active {
             background-position: -180px -210px;
         }
 
-div#GameOver > div.score_board,
-div#GameOver > div.buttons {
-    -moz-transform: translateY(0);
-    -ms-transform: translateY(0);
-    -o-transform: translateY(0);
-    -webkit-transform: translateY(0);
+#GameOver > div.score_board,
+#GameOver > div.buttons {
     transform: translateY(0);
-
-    -moz-transition: -moz-transform ease-in-out 0.5s 1s;
-    -o-transition: -o-transform ease-in-out 0.5s 1s;
-    -webkit-transition: -webkit-transform ease-in-out 0.5s 1s;
     transition: transform ease-in-out 0.5s 1s;
 }
 
-body:not(.end) div#GameOver > div.score_board,
-body:not(.end) div#GameOver > div.buttons {
-    -moz-transform: translateY(425px);
-    -ms-transform: translateY(425px);
-    -o-transform: translateY(425px);
-    -webkit-transform: translateY(425px);
+body:not(.end) #GameOver > div.score_board,
+body:not(.end) #GameOver > div.buttons {
     transform: translateY(425px);
 }
 
@@ -425,93 +290,63 @@ div.wraper {
 }
 
 @keyframes MovePoints {
-    from { left: 154px; }
-    to { left: 0; }
+    to { transform: translateZ(0); }
 }
 
-@-moz-keyframes MovePoints {
-    from { left: 154px; }
-    to { left: 0; }
-}
-
-@-webkit-keyframes MovePoints {
-    from { left: 154px; }
-    to { left: 0; }
-}
-
-ul#Trajectory {
+#Trajectory {
     width: 152px;
     height: 100%;
     position: relative;
     overflow: hidden;
 }
 
-ul#Trajectory > li {
+#Trajectory > li {
     position: absolute;
     display: block;
-    left: 154px;
+    left: 0;
     top: 211px;
+    transform: translateX(154px) translateZ(0);
     border-radius: 50%;
     width: 3px;
     height: 3px;
     box-shadow: black 0 0 3px;
     border: 1px solid white;
     background: white;
-    -moz-animation: MovePoints 0.82964601769911s infinite linear;
-    -o-animation: MovePoints 0.82964601769911s infinite linear;
-    -webkit-animation: MovePoints 0.82964601769911s infinite linear;
+    z-index: 600;
     animation: MovePoints 0.82964601769911s infinite linear;
 }
 
-    ul#Trajectory > li:nth-child(2) {
-        -moz-animation-delay: 0.13827433628319s;
-        -o-animation-delay: 0.13827433628319s;
-        -webkit-animation-delay: 0.13827433628319s;
+    #Trajectory > li:nth-child(2) {
         animation-delay: 0.13827433628319s;
     }
 
-    ul#Trajectory > li:nth-child(3) {
-        -moz-animation-delay: 0.27654867256637s;
-        -o-animation-delay: 0.27654867256637s;
-        -webkit-animation-delay: 0.27654867256637s;
+    #Trajectory > li:nth-child(3) {
         animation-delay: 0.27654867256637s;
     }
 
-    ul#Trajectory > li:nth-child(4) {
-        -moz-animation-delay: 0.41482300884956s;
-        -o-animation-delay: 0.41482300884956s;
-        -webkit-animation-delay: 0.41482300884956s;
+    #Trajectory > li:nth-child(4) {
         animation-delay: 0.41482300884956s;
     }
 
-    ul#Trajectory > li:nth-child(5) {
-        -moz-animation-delay: 0.55309734513274s;
-        -o-animation-delay: 0.55309734513274s;
-        -webkit-animation-delay: 0.55309734513274s;
+    #Trajectory > li:nth-child(5) {
         animation-delay: 0.55309734513274s;
     }
 
-    ul#Trajectory > li:nth-child(6) {
-        -moz-animation-delay: 0.69137168141593s;
-        -o-animation-delay: 0.69137168141593s;
-        -webkit-animation-delay: 0.69137168141593s;
+    #Trajectory > li:nth-child(6) {
         animation-delay: 0.69137168141593s;
     }
 
-div#Score {
+#Score {
     position: absolute;
     top: 50px;
     width: 100%;
     height: 60px;
     text-align: center;
-
-    -moz-transition: opacity ease-in-out 1s;
-    -o-transition: opacity ease-in-out 1s;
-    -webkit-transition: opacity ease-in-out 1s;
     transition: opacity ease-in-out 1s;
+    z-index: 200;
 }
 
-body.ready div#Score, body.end div#Score {
+body.ready #Score, body.end #Score {
     opacity: 0;
 }
 
@@ -531,45 +366,19 @@ body.ready div#Score, body.end div#Score {
     to { opacity: 0; }
 }
 
-@-moz-keyframes ShowMask {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
-
-@-webkit-keyframes ShowMask {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
-
 body.ready #Mask {
     display: block;
     background: black;
-    -moz-animation: ShowMask linear 0.5s forwards;
-    -o-animation: ShowMask linear 0.5s forwards;
-    -webkit-animation: ShowMask linear 0.5s forwards;
     animation: ShowMask linear 0.5s forwards;
 }
 
 body.end #Mask {
     display: block;
     background: white;
-    -moz-animation: ShowMask 0.2s ease-in-out 2 alternate-reverse forwards;
-    -o-animation: ShowMask 0.2s ease-in-out 2 alternate-reverse forwards;
-    -webkit-animation: ShowMask 0.2s ease-in-out 2 alternate-reverse forwards;
     animation: ShowMask 0.2s ease-in-out 2 alternate-reverse forwards;
 }
 
-body.end div#Bird {
-    top: 464px;
-
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
-    transform: rotate(90deg);
-
-    -moz-transition: -moz-transform ease-in .2s, top ease-in 1s;
-    -o-transition: -o-transform ease-in .2s, top ease-in 1s;
-    -webkit-transition: -webkit-transform ease-in .2s, top ease-in 1s;
-    transition: transform ease-in .2s, top ease-in 1s;
+body.end #Bird {
+    transform: translateY(464px) rotate(90deg) translateZ(0);
+    transition: transform ease-in 1s;
 }

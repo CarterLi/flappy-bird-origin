@@ -3,6 +3,7 @@
 var startTime = null, currentTime = null, a = -10, currentScore = 0;
 var nearestPipe = document.querySelector("#Pipes > li:first-child");
 var bird = document.querySelector("#Bird");
+var fps = document.querySelector("#fps");
 var audios = {
     Hit: document.querySelector("#Audio > audio.hit"),
     Wing: document.querySelector("#Audio > audio.wing"),
@@ -16,7 +17,7 @@ function game_start() {
     document.addEventListener("keypress", jump);
     document.getElementById("Background").addEventListener("mousedown", jump);
 
-    document.querySelector("body").classList.remove("ready");
+    document.body.classList.remove("ready");
 
     jump();
 
@@ -42,7 +43,7 @@ function game_over() {
                 if (++scoreNum > currentScore) {
                     window.clearInterval(interval);
                     if (currentScore > highestScore) {
-                        localStorage.setItem("highest_score", currentScore);
+                        localStorage.setItem("highest_score", String(currentScore));
                         window.setTimeout(function () {
                             setScore(document.querySelector("#GameOver > div.score_board > div.highest-score > div.new"), currentScore);
                             document.querySelector("#GameOver > div.score_board > div.is-highest-score").classList.add("show");
@@ -53,8 +54,8 @@ function game_over() {
         });
     }
 
-    document.querySelector("body").classList.add("end");
-    bird.style.transform = bird.style.webkitTransform = bird.style.top = null;
+    document.body.classList.add("end");
+    bird.style.transform = bird.style.top = null;
 
     window.setTimeout(function () {
         audios.Swooshing.play();
@@ -98,11 +99,12 @@ function setScore(element, score) {
 
 function moveBird(timestamp) {
     var t = (timestamp - currentTime) / 100;
-    var posY = bird.offsetTop - bird.speedY * t + a * t * t / 2;
-    if (posY < 0) {
-        posY = 0;
-    } else if (posY > 464) {
-        bird.style.top = "464px";
+    fps.textContent = (10 / t).toFixed(3) + " FPS";
+    bird.positionY -= bird.speedY * t + a * t * t / 2;
+    if (bird.positionY < 0) {
+        bird.positionY = 0;
+    } else if (bird.positionY > 464) {
+        bird.style.transform = "translateY(464px) rotate(" + (-bird.speedY) + "deg) translateZ(0)";
         audios.Hit.play();
         return true;
     }
@@ -110,8 +112,7 @@ function moveBird(timestamp) {
     if (bird.speedY < -40) {
         bird.speedY = -40;
     }
-    bird.style.webkitTransform = bird.style.transform = "rotate(" + (-bird.speedY) + "deg)";
-    bird.style.top = posY + "px";
+    bird.style.transform = "translateY(" + bird.positionY + "px) rotate(" + (-bird.speedY) + "deg) translateZ(0)";
 }
 
 function judge() {
@@ -123,12 +124,12 @@ function judge() {
     //        |    |
     //        |    |
     //=======================
-
-    if (nearestPipe.offsetLeft <= bird.offsetLeft + bird.offsetWidth) {
-        if (nearestPipe.offsetLeft + nearestPipe.offsetWidth >= bird.offsetLeft) {
+    var pipeOffsetLeft = parseFloat(getComputedStyle(nearestPipe).transform.substring(19));
+    if (pipeOffsetLeft <= bird.offsetLeft + bird.offsetWidth) {
+        if (pipeOffsetLeft + nearestPipe.offsetWidth >= bird.offsetLeft) {
             var emptySpace = nearestPipe.firstElementChild;
             var pipeTop = nearestPipe.offsetTop;
-            if (bird.offsetTop < emptySpace.offsetTop + pipeTop || bird.offsetTop + bird.offsetHeight > emptySpace.offsetTop + emptySpace.offsetHeight + pipeTop) {
+            if (bird.positionY < emptySpace.offsetTop + pipeTop || bird.positionY + bird.offsetHeight > emptySpace.offsetTop + emptySpace.offsetHeight + pipeTop) {
                 audios.Hit.play();
                 return true;
             }
@@ -136,7 +137,7 @@ function judge() {
             setScore(document.getElementById("Score"), ++currentScore);
             audios.Point.currentTime = 0;
             audios.Point.play();
-            nearestPipe = nearestPipe.nextElementSibling || document.querySelector("#Pipes > li:first-child");
+            nearestPipe = nearestPipe.nextElementSibling || document.querySelector("#Pipes :first-child");
         }
     }
 }
@@ -160,7 +161,7 @@ function go(timestamp) {
     document.addEventListener("keypress", game_start);
     document.getElementById("Background").addEventListener("mousedown", game_start);
 
-    document.querySelector("div#GameOver a.play").addEventListener("click", function () {
+    document.querySelector("#GameOver a.play").addEventListener("click", function () {
         window.location.reload();
     });
 
@@ -172,20 +173,18 @@ function go(timestamp) {
         event = function () {
             this.style.top = (-Math.random() * 350 - 50) + "px";
         };
-        pipe.addEventListener("webkitAnimationIteration", event);
         pipe.addEventListener("animationiteration", event);
     }
     var points = document.querySelectorAll("#Trajectory > li");
     for (var j = 0; j < points.length; ++j) {
         var point = points.item(j);
         event = function () {
-            this.style.top = (bird.offsetTop + 11) + "px";
+            this.style.top = (bird.positionY + 11) + "px";
         };
-        point.addEventListener("webkitAnimationStart", event);
-        point.addEventListener("webkitAnimationIteration", event);
         point.addEventListener("animationstart", event);
         point.addEventListener("animationiteration", event);
     }
 
     bird.speedY = 0;
+    bird.positionY = parseFloat(getComputedStyle(bird).transform.substring(22));
 })();
