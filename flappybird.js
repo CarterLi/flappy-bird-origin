@@ -96,18 +96,15 @@ function removePipe() {
 }
 
 function setScore(element, score) {
-    var i = 1;
-    for (; i <= 4; ++i) {
+    var i = 4, chars = element.children;
+    while (i --> 0) {
         var num = score % 10;
-        element.querySelector("span:nth-last-child(" + i + ")").dataset.number = num;
+        chars[i].dataset.number = num;
         score = Math.floor(score / 10);
-        if (score === 0) {
-            ++i;
-            break;
-        }
+        if (score === 0) break;
     }
-    for (; i <= 4; ++i) {
-        delete element.querySelector("span:nth-last-child(" + i + ")").dataset.number;
+    while (i --> 0) {
+        chars[i].removeAttribute('data-number');
     }
 }
 
